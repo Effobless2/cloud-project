@@ -1,35 +1,3 @@
-var tasklist = [
-    {
-        name: "Say Hello",
-        content: "Put the coconut in a nut",
-        id: 1,
-        checked: false
-    },
-    {
-        name: "Say Me",
-        content: "Put   in a nut",
-        id: 2,
-        checked: true
-    },
-    {
-        name: "Say Don't",
-        content: "Put the  in a nut",
-        id: 3,
-        checked: false
-    },
-    {
-        name: "Say Point",
-        content: "Put the coconut in a ",
-        id: 4,
-        checked: true
-    },
-    {
-        name: "Say Hello",
-        content: "Put the coconut  a nut",
-        id: 5,
-        checked: true
-    },
-]
 var apiUrl = 'https://localhost:44325/api/todo/'
 
 async function getTasks(){
