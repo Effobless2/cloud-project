@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>TODO List</title>
 </head>
@@ -31,29 +32,29 @@
     $(document).ready(function (){
         fullfillTasks();
 
-        $("#btnCreationTask").click(function (){
+        $("#btnCreationTask").click(async function (){
             let name = $("#taskName").val();
             let content = $("#taskContent").val();
-            let id = createTask(name, content);
+            let id = await createTask(name, content);
             fullfillTasks();
         });
 
 
     });
 
-    function fullfillTasks(){
-        let myTasks = getTasks();
+    async function fullfillTasks(){
+        let myTasks = await getTasks();
         $("#tasksContainer")[0].innerHTML = "";
         myTasks.forEach(task => {
             $("#tasksContainer")[0].innerHTML += `<li>${createTaskHtmlComponent(task)}</li>`;
         });
-        $(".taskRemoval").click(function (){
-            deleteTask($(this)[0].value);
+        $(".taskRemoval").click(async function (){
+            await deleteTask($(this)[0].value);
             fullfillTasks();
         });
-        $(".taskChecker").click(function (){
+        $(".taskChecker").click(async function (){
             console.log($(this)[0].value)
-            check($(this)[0].value);
+            await check($(this)[0].value);
         });
     }
 

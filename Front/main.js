@@ -30,40 +30,70 @@ var tasklist = [
         checked: true
     },
 ]
+var apiUrl = 'https://localhost:44325/api/todo/'
 
-function getTasks(){
-    return tasklist;
+async function getTasks(){
+    let result = await axios.get(apiUrl, {
+        header: {'Access-Control-Allow-Origin': '*'}
+    })
+    .then(function(response){
+        return response.data;
+    })
+    .catch(function (error){
+        console.log(error);
+    });
+    return result;
 }
 
-function createTask(name, content){
-    let id = 0
-    for(let i = 0; i < tasklist.length; i++)
-        if(tasklist[i].id > id) id = tasklist[i].id;
-    
-    tasklist.push(
-        {
-            id:id+1,
-            name: name,
-            content: content,
-            checked: false
+async function createTask(name, content){
+    let result = await axios.put(apiUrl,
+    {
+        checked: false,
+        name: name,
+        content: content
+    }, 
+    {
+        header: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "application/json"
         }
-    );
-    return id+1;
+    })
+    .then(function(response){
+        return response.data;
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+    return result;
 }
 
-function check(id){
-    for(let i = 0; i < tasklist.length; i++){
-        if (tasklist[i].id == id){
-            tasklist[i].checked = !tasklist[i].checked;
-            break;
+async function check(id){
+    console.log("connard");
+    let result = await axios.patch(apiUrl + `Check/${id}`, {
+        header: {
+            "Access-Control-Allow-Origin": "*"
         }
-    }
+    })
+    .then(function(response){
+        return response.data;
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+    return result;
 }
 
-function deleteTask(id){
-    for(let i = 0; i < tasklist.length; i++)
-        if(tasklist[i].id == id){
-            tasklist.splice(i,1);
-            break;
+async function deleteTask(id){
+    let result = axios.delete(apiUrl + id,{
+        header: {
+            "Access-Control-Allow-Origin": "*"
         }
+    })
+    .then(function(response){
+        return response.data;
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+    return result;
 }

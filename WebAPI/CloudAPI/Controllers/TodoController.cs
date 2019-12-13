@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CloudAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,36 +14,36 @@ namespace CloudAPI.Controllers
     public class TodoController : ControllerBase
     {
         public static List<TodoElement> TodoList { get; set; } = new List<TodoElement>()
+        {
+            new TodoElement()
             {
-                new TodoElement()
-                {
-                    Id = 0,
-                    Name = "Miam miam",
-                    Content = "Faire à manger",
-                    Checked = false
-                },
-                new TodoElement()
-                {
-                    Id = 1,
-                    Name = "Duel",
-                    Content = "It's time to du-du-du-duel !",
-                    Checked = false
-                },
-                new TodoElement()
-                {
-                    Id = 2,
-                    Name = "Sleep",
-                    Content = "Dodo Maison",
-                    Checked = true
-                },
-                new TodoElement()
-                {
-                    Id = 3,
-                    Name = "Pas content",
-                    Content = "Grèver",
-                    Checked = true
-                },
-            };
+                Id = 0,
+                Name = "Miam miam",
+                Content = "Faire à manger",
+                Checked = false
+            },
+            new TodoElement()
+            {
+                Id = 1,
+                Name = "Duel",
+                Content = "It's time to du-du-du-duel !",
+                Checked = false
+            },
+            new TodoElement()
+            {
+                Id = 2,
+                Name = "Sleep",
+                Content = "Dodo Maison",
+                Checked = true
+            },
+            new TodoElement()
+            {
+                Id = 3,
+                Name = "Pas content",
+                Content = "Grèver",
+                Checked = true
+            },
+        };
 
         [HttpGet]
         public ActionResult<List<TodoElement>> Get()
@@ -57,7 +58,7 @@ namespace CloudAPI.Controllers
             {
                 return TodoList.First(todo => todo.Id == id);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -68,7 +69,7 @@ namespace CloudAPI.Controllers
         {
             todo.Id = TodoList.Count;
             TodoList.Add(todo);
-           return todo.Id;
+            return todo.Id;
         }
 
         [HttpPatch("Check/{id}")]
@@ -102,7 +103,7 @@ namespace CloudAPI.Controllers
         }
 
         [HttpPatch("{id}")]
-        public ActionResult Edit(int id,  [FromBody]TodoElement todo)
+        public ActionResult Edit(int id, [FromBody]TodoElement todo)
         {
             try
             {
