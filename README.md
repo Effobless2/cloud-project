@@ -1,49 +1,40 @@
 # Cloud-Project
 
-
-## Getting Started (Without docker)
-
-### Prerequisites
-
-Installing node10.x and npm
-
-### Installing dependence
-
-run `npm install` at project root.
-
-### Running app
-
-run `npm start` at project root. Acces app -> http://localhost:8080
-
-
-## Getting Started (With docker)
+## Getting Started
 
 ### Prerequisites
-
-Docker
 
 .Net Core 3.0
 
-### Running app
+Docker
 
-#### Running WebAPI
+Installing node10.x and npm (if you don't wanna use Docker)
+
+### Running WebAPI
+#### With Command Lines
 Go to WebAPI/CloudAPI Folder:
-    - dotnet build
-    - dotnet run
+ - run ```dotnet build``` -> Installing dependencies and building Solution
+ - run ```dotnet run``` -> Launch API
+#### With Visual Studio
+ - Open WebAPI/CloudAPI/CloudAPI.sln Solution with Visual Studio
+ - Run the solution
 
-#### Running Front
+### Running Front
+#### Without Docker
 Go to Front Folder:
-    - run `docker build -t cloud-project .` at project root for build image
-
-    - run `docker run -d -p {PORT}:8080 cloud-project` Acces app -> http://localhost:{PORT}
+ - run ```npm install``` -> Installing depedencies
+ - run ```npm start``` Launch app -> http://localhost:8080
+ 
+#### With Docker
+Go to Front Folder:
+ - run ```docker build -t cloud-project .``` -> build a Docker Image
+ - run ```docker run -d -p {PORT}:8080 cloud-project``` -> Runs the docker container
+ Access app -> http://localhost:{PORT}
 
 [WARNING] Maybe, the WebAPI will run on port 5001. If it is the case, you should change the destination port in Front/main.js file in variable "apiUrl"
-
 
 ## Authors
 
 * **Maxime Deboffle**
 * **Aminah Saidi** 
 * **Pierre Sid-Idris**
-
-
