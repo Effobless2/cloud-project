@@ -46,13 +46,13 @@ namespace CloudAPI.Controllers
         };
 
         [HttpGet]
-        public ActionResult<List<TodoElement>> Get()
+        public async Task<ActionResult<List<TodoElement>>> Get()
         {
             return TodoList;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<TodoElement> Details(int id)
+        public async Task<ActionResult<TodoElement>> Details(int id)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace CloudAPI.Controllers
         }
 
         [HttpPut]
-        public ActionResult<int> Create(TodoElement todo)
+        public async Task<ActionResult<int>> Create(TodoElement todo)
         {
             todo.Id = TodoList.Count;
             TodoList.Add(todo);
@@ -73,7 +73,7 @@ namespace CloudAPI.Controllers
         }
 
         [HttpPatch("Check/{id}")]
-        public ActionResult Check(int id)
+        public async Task<ActionResult> Check(int id)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace CloudAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace CloudAPI.Controllers
         }
 
         [HttpPatch("{id}")]
-        public ActionResult Edit(int id, [FromBody]TodoElement todo)
+        public async Task<ActionResult> Edit(int id, [FromBody]TodoElement todo)
         {
             try
             {
