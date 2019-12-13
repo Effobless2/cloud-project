@@ -20,13 +20,25 @@ run `npm start` at project root. Acces app -> http://localhost:8080
 
 ### Prerequisites
 
-Installing docker
+Docker
+
+.Net Core 3.0
 
 ### Running app
 
-run `docker build -t cloud-project .` at project root for build image
+#### Running WebAPI
+Go to WebAPI/CloudAPI Folder:
+    - dotnet build
+    - dotnet run
 
-run `docker run -d -p {PORT}:8080 cloud-project` Acces app -> http://localhost:{PORT}
+#### Running Front
+Go to Front Folder:
+    - run `docker build -t cloud-project .` at project root for build image
+
+    - run `docker run -d -p {PORT}:8080 cloud-project` Acces app -> http://localhost:{PORT}
+
+[WARNING] Maybe, the WebAPI will run on port 5001. If it is the case, you should change the destination port in Front/main.js file in variable "apiUrl"
+
 
 ## Authors
 
