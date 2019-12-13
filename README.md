@@ -12,7 +12,7 @@
 ### Installing DataBase
  - Create a Database called 'TodoDB'
  - Run the Script from DBFiles/Todo.sql
- [Note] If you don't create the database locally, you should update WebAPI/CloudAPI/appsettings.json File and changing the "ConnectionString" value with the correct one.
+ - [Note] If you don't create the database locally, you should update WebAPI/CloudAPI/appsettings.json File and changing the "ConnectionString" value with the correct one.
  
 ### Running WebAPI
 #### With Command Lines
