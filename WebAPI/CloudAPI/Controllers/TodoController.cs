@@ -6,6 +6,7 @@ using CloudAPI.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SqlService;
 
 namespace CloudAPI.Controllers
 {
@@ -44,11 +45,25 @@ namespace CloudAPI.Controllers
                 Checked = true
             },
         };
+        private readonly ISqlService sqlService;
+
+        public TodoController(ISqlService _sqlService)
+        {
+            sqlService = _sqlService;
+        }
 
         [HttpGet]
         public async Task<ActionResult<List<TodoElement>>> Get()
         {
-            return TodoList;
+            try
+            {
+                List<TodoElement> result = await sqlService.Get();
+                return result;
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("{id}")]
@@ -56,7 +71,8 @@ namespace CloudAPI.Controllers
         {
             try
             {
-                return TodoList.First(todo => todo.Id == id);
+                TodoElement result = await sqlService.Get(id);
+                return result;
             }
             catch (Exception)
             {
@@ -67,9 +83,15 @@ namespace CloudAPI.Controllers
         [HttpPut]
         public async Task<ActionResult<int>> Create(TodoElement todo)
         {
-            todo.Id = TodoList.Count;
-            TodoList.Add(todo);
-            return todo.Id;
+            try
+            {
+                int result = await sqlService.Create(todo);
+                return todo.Id;
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
 
         [HttpPatch("Check/{id}")]
@@ -77,8 +99,7 @@ namespace CloudAPI.Controllers
         {
             try
             {
-                TodoElement todo = TodoList.First(todo => todo.Id == id);
-                todo.Checked = !todo.Checked;
+                await sqlService.Check(id);
                 return Ok();
             }
             catch (Exception)
@@ -92,8 +113,7 @@ namespace CloudAPI.Controllers
         {
             try
             {
-                TodoElement todo = TodoList.First(todo => todo.Id == id);
-                TodoList.Remove(todo);
+                await sqlService.Delete(id);
                 return Ok();
             }
             catch (Exception)
@@ -102,15 +122,12 @@ namespace CloudAPI.Controllers
             }
         }
 
-        [HttpPatch("{id}")]
-        public async Task<ActionResult> Edit(int id, [FromBody]TodoElement todo)
+        [HttpPatch]
+        public async Task<ActionResult> Edit(TodoElement todo)
         {
             try
             {
-                TodoElement ExistingTodo = TodoList.First(todo => todo.Id == id);
-                ExistingTodo.Checked = todo.Checked;
-                ExistingTodo.Content = todo.Content;
-                ExistingTodo.Name = todo.Name;
+                await sqlService.Edit(todo);
                 return Ok();
             }
             catch (Exception)
