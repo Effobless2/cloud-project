@@ -35,6 +35,11 @@ namespace CloudAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            //Activating access-control into the global Application level, not into the services level (app level higher than the services level)
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       );
 
             app.UseHttpsRedirection();
 
