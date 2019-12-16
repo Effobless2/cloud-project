@@ -40,5 +40,5 @@ Go to Front Folder:
 ## Authors
 
 * **Maxime Deboffle**
-* **Aminah Saidi** 
+* **Amina Saidi** 
 * **Pierre Sid-Idris**
