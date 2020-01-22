@@ -1,11 +1,14 @@
 FROM node:10.4
 
 WORKDIR /usr/src/app
-COPY . .
 
+COPY package.json .
+COPY app.js .
+COPY index.html .
+COPY main.js .
 
 RUN npm install
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD npm start

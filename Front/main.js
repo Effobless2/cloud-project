@@ -1,4 +1,4 @@
-var apiUrl = 'https://localhost:44325/api/todo/'
+var apiUrl = 'https://esgi-4al1-group03-cloud-project-api.azurewebsites.net/api/todo/'
 
 async function getTasks(){
     let result = await axios.get(apiUrl, {

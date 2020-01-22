@@ -3,3 +3,5 @@
 ################################################################################
 
 /WebAPI/CloudAPI/CloudAPI.csproj.user
+**/package-lock.json
+**/node_modules/**

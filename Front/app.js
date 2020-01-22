@@ -2,7 +2,7 @@ const express = require("express");
 path = require('path');
 app=express();
 
-const PORT = 8080;
+const PORT = 80;
 
 app.use(express.static(__dirname));
 
