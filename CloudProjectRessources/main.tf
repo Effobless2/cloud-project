@@ -107,6 +107,7 @@ resource "azurerm_function_app" "azure_function" {
   resource_group_name       = "${azurerm_resource_group.main.name}"
   app_service_plan_id       = "${azurerm_app_service_plan.azure_function.id}"
   storage_connection_string = "${azurerm_storage_account.azure_function.primary_connection_string}"
+  version                   = "~2"
 }
 
 
