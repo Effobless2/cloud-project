@@ -9,7 +9,7 @@
  - az cli
  
 ### How to use
- - CloudRessources/ressources.ps1 : Update credentials with your Azure Credentials
+ - CloudProjectRessources/ressources.ps1 : Update credentials with your Azure Credentials
  - Run your powershell into the folder of ps1 scripts
  - Run ressources.ps1
 
